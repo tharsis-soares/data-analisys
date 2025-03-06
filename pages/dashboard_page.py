@@ -12,6 +12,7 @@ if 'csv_data' in st.session_state:
     st.write("### Data Table")
     st.dataframe(df.head())
     
+    
     if 'VALOR' in df.columns:
         df['VALOR'] = df['VALOR'].str.replace(',', '.').astype(float)
     
