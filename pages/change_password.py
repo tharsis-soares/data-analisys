@@ -12,7 +12,7 @@ if st.button("Atualizar Senha"):
     else:
         try:
             # Atualiza a senha do usuário usando o método de update do Supabase Auth.
-            response = supabase.auth.update({"password": new_password})
+            response = supabase.auth.update_user({"password": new_password})
             st.success("Senha atualizada com sucesso!")
             # Aqui, após atualizar, é necessário remover a flag 'password_change_required'
             # Isso pode ser feito via uma função de atualização nos metadados do usuário (depende da implementação do Supabase)

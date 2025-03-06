@@ -5,3 +5,4 @@ fpdf
 redis
 python-dotenv
 supabase
+st-supabase-connection
