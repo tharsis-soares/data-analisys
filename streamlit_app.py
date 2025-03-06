@@ -1,10 +1,11 @@
+
 import streamlit as st
+# DEVE ser a primeira instrução
+st.set_page_config(page_title="DREXBPO Finance", layout="wide")
+
 from utils.theme import apply_theme
 from components.auth import is_authenticated, login_page, logout, get_user
 from components.security import get_user_permissions
-
-# DEVE ser a primeira instrução
-st.set_page_config(page_title="DREXBPO Finance", layout="wide")
 
 # Aplica o tema moderno e as animações
 apply_theme()
@@ -13,11 +14,27 @@ apply_theme()
 # força a alteração de senha antes de permitir acesso às demais páginas.
 if is_authenticated():
     user = get_user()
-    if user.get("user_metadata", {}).get("password_change_required", False):
+    #if user.get("user_metadata", {}).get("password_change_required", False):
+    #    with open("pages/change_password.py") as f:
+    #        code = compile(f.read(), "change_password.py", "exec")
+    #        exec(code)
+    #    st.stop()  # Interrompe a execução até que a senha seja alterada
+    if isinstance(user, dict):
+        password_change_required = user.get("user_metadata", {}).get("password_change_required", False)
+    else:
+        # Acessa como atributo de objeto
+        try:
+            password_change_required = user.user_metadata.password_change_required if hasattr(user, 'user_metadata') and user.user_metadata else False
+        except AttributeError:
+            password_change_required = False
+            
+    if password_change_required:
         with open("pages/change_password.py") as f:
             code = compile(f.read(), "change_password.py", "exec")
             exec(code)
-        st.stop()  # Interrompe a execução até que a senha seja alterada
+        st.stop()
+
+
 
 # Define menu conforme autenticação
 if is_authenticated():

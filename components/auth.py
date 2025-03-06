@@ -3,7 +3,8 @@ from utils.config import supabase
 
 def get_user():
     """Retorna o usuário armazenado no session_state."""
-    return st.session_state.get("user")
+    if "user" in st.session_state:
+        return st.session_state.get("user")
 
 def is_authenticated():
     """Verifica se há um usuário logado."""
