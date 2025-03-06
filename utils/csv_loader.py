@@ -28,16 +28,16 @@ def load_csv(file):
                 break
 
         # Renomear colunas para um formato padrão
-        df.columns = ["CODIGO", "DATA", "TIPO", "DESCRICAO", "VALOR"][: len(df.columns)]
+        #df.columns = ["CODIGO", "DATA", "TIPO", "DESCRICAO", "VALOR"][: len(df.columns)]
         
         # Converter a coluna "DATA" para datetime
-        df["DATA"] = pd.to_datetime(df["DATA"], errors="coerce", format="%d/%m/%Y")
+        #df["DATA"] = pd.to_datetime(df["DATA"], errors="coerce", format="%d/%m/%Y")
 
         # Converter "VALOR" para número, corrigindo vírgula para ponto decimal
-        df["VALOR"] = df["VALOR"].str.replace(",", ".").astype(float)
+        #df["VALOR"] = df["VALOR"].str.replace(",", ".").astype(float)
 
-        return df.dropna()  # Remove linhas inválidas
-
+        #return df.dropna()  # Remove linhas inválidas
+        return df
     except Exception as e:
         st.error(f"Erro ao carregar o CSV: {e}")
         return None
