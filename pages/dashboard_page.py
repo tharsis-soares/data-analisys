@@ -12,10 +12,15 @@ if 'csv_data' in st.session_state:
     st.write("### Data Table")
     st.dataframe(df.head())
     
+
     
     if 'VALOR' in df.columns:
         df['VALOR'] = df['VALOR'].str.replace(',', '.').astype(float)
-    
+  
+    if 'VALOR' in df.columns:
+        #df['VALOR'] = df['VALOR'].str.replace(',', '.').astype(float)
+        df['VALOR'] = df['VALOR'].astype(str).str.replace(',', '.').apply(pd.to_numeric, errors='coerce')
+
     # Display each column as a separate chart
     st.write("### Data Charts")
     for column in df.select_dtypes(include=['number']).columns:

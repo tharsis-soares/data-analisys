@@ -9,6 +9,7 @@ if uploaded_file is not None:
     with st.spinner("Carregando CSV, por favor aguarde..."):
         df = load_csv(uploaded_file)
     if df is not None:
+        st.session_state["csv_data"] = df
         st.success("CSV carregado com sucesso!")
         st.write("Visualização dos primeiros registros:")
         st.dataframe(df.head())
