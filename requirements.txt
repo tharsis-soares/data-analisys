@@ -6,3 +6,4 @@ redis
 python-dotenv
 supabase
 st-supabase-connection
+matplotlib
