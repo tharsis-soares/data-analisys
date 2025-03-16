@@ -13,7 +13,13 @@ contas_data = {
     "Valor": [8000, 6000, 10000, 9000],
     "Vencimento": ["2023-09-10", "2023-09-15", "2023-09-20", "2023-09-25"]
 }
-df_contas = pd.DataFrame(contas_data)
+
+# if "csv_data" in st.session_state:
+# else:
+#     print("Não há dados carregados")
+    #df_contas = pd.DataFrame(contas_data)
+
+df_contas = st.session_state["csv_data"]    
 st.dataframe(df_contas)
 
 # Despesas Fixas e Variáveis
@@ -23,7 +29,7 @@ despesas_data = {
     "Tipo": ["Fixa", "Fixa", "Variável", "Variável", "Variável"],
     "Valor Mensal": [3000, 12000, 800, 1500, 600]
 }
-df_despesas = pd.DataFrame(despesas_data)
+df_despesas = pd.DataFrame(df_contas)
 st.dataframe(df_despesas)
 
 # Histórico de Faturamento
@@ -32,7 +38,7 @@ historico_data = {
     "Mês": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
     "Faturamento": [14000, 14500, 15000, 15500, 16000, 16500, 17000, 17500, 18000, 18500, 19000, 19500]
 }
-df_historico = pd.DataFrame(historico_data)
+df_historico = pd.DataFrame(df_contas)
 st.dataframe(df_historico)
 
 # Exportação para Excel
@@ -64,8 +70,8 @@ def generate_pdf():
     pdf.set_font("Arial", "", 12)
     pdf.cell(0, 10, "Contas a Pagar e Receber:", ln=True)
     pdf.ln(5)
-    for idx, row in df_contas.iterrows():
-        pdf.cell(0, 10, f"{row['Fornecedor/Cliente']} - {row['Tipo']} - R${row['Valor']} - Vencimento: {row['Vencimento']}", ln=True)
+    # for idx, row in df_contas.iterrows():
+    #     pdf.cell(0, 10, f"{row['Fornecedor/Cliente']} - {row['Tipo']} - R${row['Valor']} - Vencimento: {row['Vencimento']}", ln=True)
     pdf_file = "relatorio_financeiro.pdf"
     pdf.output(pdf_file)
     return pdf_file
