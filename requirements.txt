@@ -8,3 +8,4 @@ supabase
 st-supabase-connection
 matplotlib
 scikit-learn
+XlsxWriter
